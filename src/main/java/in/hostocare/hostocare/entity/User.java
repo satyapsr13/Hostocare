@@ -1,6 +1,7 @@
 package in.hostocare.hostocare.entity;
 
 import in.hostocare.hostocare.constants.RoleType;
+import in.hostocare.hostocare.dto.request.UserRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -29,4 +30,13 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private RoleType role;
+
+    // Static factory method to convert UserRequest → User
+    public static User fromRequest(UserRequest request) {
+        User user = new User();
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setRole(RoleType.USER);
+        return user;
+    }
 }
